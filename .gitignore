@@ -1,3 +1,9 @@
-.vscode/**/*
+.vscode
 *.exe
 *.o
+*.d
+*.out
+*.exe
+*.log
+*.txt
+*.zip
