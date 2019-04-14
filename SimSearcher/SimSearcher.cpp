@@ -21,8 +21,8 @@ SimSearcher::SimSearcher()
     qgram_list = nullptr;
     str_list = new char*[200000];
     term_ids = new vector<unsigned>*[200000];
-    _mv_ed = 0.0085;
-    _mv_jaccard = 0.007;
+    _mv_ed = 0.0075;
+    _mv_jaccard = 0.0085;
     _min_term_num = 512;
 }
 
@@ -49,6 +49,9 @@ void SimSearcher::read_dataset(const char* filename) {
         input[i] = '\0';
         len_list[str_num] = input + i - str_list[str_num];
         ++str_num;
+        // if (str_num > 200) {
+        //     break;
+        // }
     }
 }
 
@@ -56,11 +59,13 @@ int SimSearcher::createIndex(const char *filename, unsigned q)
 {
     this->_q = q;
     read_dataset(filename);
-    qgram_list = new InvertedList(q);
-    term_list = new InvertedList();
+    qgram_list = new TrieInvertedList(q);
+    term_list = new TrieInvertedList();
+    // qgram_list = new InvertedList(q);
+    // term_list = new InvertedList();
+    qgram_list->insert_qgram(str_list, str_num);
     for (int i = 0; i < str_num; ++i) {
         term_ids[i] = &block3[b3p++];
-        qgram_list->insert_qgram(str_list[i], i);
         term_list->insert_term(str_list[i], i, *(term_ids[i]));
         term_len_list[i] = term_ids[i]->size();
         _min_term_num = min(_min_term_num, term_len_list[i]);
@@ -169,8 +174,6 @@ int SimSearcher::searchJaccard(const char* query, double threshold, vector<pair<
     if (tot <= 0) {
         candidates = term_num_filter(inv_idx.size(), jaccard_th);
     } else {
-        vector<unsigned>** ids = term_ids;
-        int q_num = inv_idx.size();
         candidates = divide_skip(tot, inv_idx, filter_jaccard, _mv_jaccard);
     }
     verify_filter_jaccard(query_term, jaccard_th, candidates, result);

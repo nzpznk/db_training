@@ -1,5 +1,6 @@
 #include <set>
 #include <map>
+#include <string>
 #include <vector>
 #include <cstring>
 #include <iostream>

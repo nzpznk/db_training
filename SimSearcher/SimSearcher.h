@@ -1,5 +1,6 @@
 #pragma once
-#include "InvertedList.h"
+#include "TrieInvertedList.h"
+// #include "InvertedList.h"
 #include <list>
 #include <queue>
 #include <vector>
@@ -67,7 +68,9 @@ private:
     double _mv_jaccard;
     char** str_list;
     vector<unsigned>** term_ids;
-    InvertedList* qgram_list;
-    InvertedList* term_list;
+    TrieInvertedList* qgram_list;
+    TrieInvertedList* term_list;
+    // InvertedList* qgram_list;
+    // InvertedList* term_list;
     vector<reference_wrapper<vector<int>>> inv_idx;
 };
