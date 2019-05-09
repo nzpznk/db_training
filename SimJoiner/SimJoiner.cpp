@@ -61,7 +61,7 @@ int SimJoiner::joinED(const char *filename1, const char *filename2, unsigned thr
     return SUCCESS;
 }
 
-vector<string> SimJoiner::substringSelection(const char* str, int len, int l, int t) {
+inline vector<string> SimJoiner::substringSelection(const char* str, int len, int l, int t) {
     vector<string> ret;
     int delta = len-l;
     int st = max({0, segStartTable[l][t]-t, segStartTable[l][t]+delta-(tau-t)});
@@ -98,7 +98,7 @@ void SimJoiner::passJoin(vector<const char*>& strs1, vector<int>& lens1,
     }
 }
 
-void SimJoiner::verify_ed_dist( int first_id, 
+inline void SimJoiner::verify_ed_dist( int first_id, 
                                 const char* query, 
                                 vector<const char*>& strs2, 
                                 vector<int>& lens2, 
