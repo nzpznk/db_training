@@ -22,7 +22,7 @@ SimSearcher::SimSearcher()
     str_list = new char*[200000];
     term_ids = new vector<unsigned>*[200000];
     _mv_ed = 0.0075;
-    _mv_jaccard = 0.0085;
+    _mv_jaccard = 0.0075;
     _min_term_num = 512;
 }
 
