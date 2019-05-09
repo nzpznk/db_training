@@ -2,6 +2,7 @@
 #define __EXP2_SIMJOINER_H__
 
 #include <set>
+#include <bitset>
 #include <vector>
 #include <cstring>
 #include <string>
@@ -43,9 +44,10 @@ private:
     vector<string> substringSelection(const char* str, int len, int l, int t);
     void verify_ed_dist(int first_id, 
                         const char* query, 
+                        int q_length, 
                         vector<const char*>& strs2, 
                         vector<int>& lens2, 
-                        const set<int>& candidates, 
+                        const vector<int>& candidates, 
                         vector<EDJoinResult>& result);
     int tau;
     vector<const char*> strSet1;

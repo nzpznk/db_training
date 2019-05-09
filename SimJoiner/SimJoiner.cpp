@@ -61,7 +61,7 @@ int SimJoiner::joinED(const char *filename1, const char *filename2, unsigned thr
     return SUCCESS;
 }
 
-inline vector<string> SimJoiner::substringSelection(const char* str, int len, int l, int t) {
+vector<string> SimJoiner::substringSelection(const char* str, int len, int l, int t) {
     vector<string> ret;
     int delta = len-l;
     int st = max({0, segStartTable[l][t]-t, segStartTable[l][t]+delta-(tau-t)});
@@ -78,7 +78,7 @@ void SimJoiner::passJoin(vector<const char*>& strs1, vector<int>& lens1,
     for (int i = 0; i < strs1.size(); ++i) {
         const char* str = strs1[i];
         int len = lens1[i];
-        set<int> candidateSet;
+        vector<int> candidateSet;
         for (int l = len - tau; l <= len + tau; ++l) {
             for (int t = 0; t <= tau; ++t) {
                 // sub string selection
@@ -88,24 +88,28 @@ void SimJoiner::passJoin(vector<const char*>& strs1, vector<int>& lens1,
                 InvIndexMap::iterator iter;
                 for (string substring : substringSet) {
                     if ((iter = indexMap.find(substring)) != indexMap.end()) {
-                        candidateSet.insert(iter->second.begin(), iter->second.end());
+                        candidateSet.insert(candidateSet.end(), iter->second.begin(), iter->second.end());
+                        // candidateSet.insert(iter->second.begin(), iter->second.end());
                     }
                 }
             }
         }
+        sort(candidateSet.begin(), candidateSet.end());
+        auto ip = unique(candidateSet.begin(), candidateSet.end());
+        candidateSet.resize(ip - candidateSet.begin());
         // verification
-        verify_ed_dist(i, str, strs2, lens2, candidateSet, result);
+        verify_ed_dist(i, str, lens1[i], strs2, lens2, candidateSet, result);
     }
 }
 
-inline void SimJoiner::verify_ed_dist( int first_id, 
-                                const char* query, 
-                                vector<const char*>& strs2, 
-                                vector<int>& lens2, 
-                                const set<int>& candidates, 
-                                vector<EDJoinResult>& result)
+inline void SimJoiner::verify_ed_dist(  int first_id, 
+                                        const char* query, 
+                                        int q_length, 
+                                        vector<const char*>& strs2, 
+                                        vector<int>& lens2, 
+                                        const vector<int>& candidates, 
+                                        vector<EDJoinResult>& result)
 {
-    int q_length = strlen(query);
     for (int i = 0; i <= tau; ++i) {
         ed_mat[i][0] = i;
     }
