@@ -1,4 +1,5 @@
 .vscode
+papers/
 *.exe
 *.o
 *.d
