@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script type="text/javascript"
+        src="http://api.map.baidu.com/api?v=3.0&ak=你的API_KEY"></script>
+</head>
+
+<body>
+    <table id="empty" cellspacing="20">
+        <th>
+            <table border="2" cellspacing="1" cellpadding="5">
+                <tbody>
+                    <tr>
+                        <th>ST POINT ID:</th>
+                        <th><input type="number" id="st_node_id" min="0" max="338023" value="0"></th>
+                    </tr>
+                    <tr>
+                        <th>longitude:</th>
+                        <th id="st_longitude"></th>
+                    </tr>
+                    <tr>
+                        <th>latitude:</th>
+                        <th id="st_latitude"></th>
+                    </tr>
+                </tbody>
+            </table>
+        </th>
+        <th>
+            <table border="2" cellspacing="1" cellpadding="5">
+                <tbody>
+                    <tr>
+                        <th>ED POINT ID:</th>
+                        <th><input type="number" id="ed_node_id" min="0" max="338023" value="0"></th>
+                    </tr>
+                    <tr>
+                        <th>longitude:</th>
+                        <th id="ed_longitude"></th>
+                    </tr>
+                    <tr>
+                        <th>latitude:</th>
+                        <th id="ed_latitude"></th>
+                    </tr>
+                </tbody>
+            </table>
+        </th>
+        <th>
+            <table id="car_info" border="1" cellspacing="0" cellpadding="2">
+                <tbody>
+                    <tr>
+                        <th>出租车距离(m)</th>
+                        <th>出租车ID</th>
+                        <th>乘客人数</th>
+                        <th>显示原路径</th>
+                        <th>显示新路径</th>
+                    </tr>
+                    <tr>
+                        <th class="distance"></th>
+                        <th class="car_id"></th>
+                        <th class="cust_num"></th>
+                        <th><input id="1 0" type="radio" name="which_path" value="1 0"></th>
+                        <th><input id="1 1" type="radio" name="which_path" value="1 1"></th>
+                    </tr>
+                    <tr>
+                        <th class="distance"></th>
+                        <th class="car_id"></th>
+                        <th class="cust_num"></th>
+                        <th><input id="2 0" type="radio" name="which_path" value="2 0"></th>
+                        <th><input id="2 1" type="radio" name="which_path" value="2 1"></th>
+                    </tr>
+                    <tr>
+                        <th class="distance"></th>
+                        <th class="car_id"></th>
+                        <th class="cust_num"></th>
+                        <th><input id="3 0" type="radio" name="which_path" value="3 0"></th>
+                        <th><input id="3 1" type="radio" name="which_path" value="3 1"></th>
+                    </tr>
+                    <tr>
+                        <th class="distance"></th>
+                        <th class="car_id"></th>
+                        <th class="cust_num"></th>
+                        <th><input id="4 0" type="radio" name="which_path" value="4 0"></th>
+                        <th><input id="4 1" type="radio" name="which_path" value="4 1"></th>
+                    </tr>
+                    <tr>
+                        <th class="distance"></th>
+                        <th class="car_id"></th>
+                        <th class="cust_num"></th>
+                        <th><input id="5 0" type="radio" name="which_path" value="5 0"></th>
+                        <th><input id="5 1" type="radio" name="which_path" value="5 1"></th>
+                    </tr>
+                </tbody>
+            </table>
+        </th>
+        <th>
+            <input id="pick_st" type="radio" name="pick_which" value="pick_st" checked><label
+                for="pick_st">选取起点</label><br />
+            <input id="pick_ed" type="radio" name="pick_which" value="pick_ed"><label for="pick_ed">选取终点</label>
+        </th>
+        <th>
+            <button id="find_car_btn">开始找车</button>
+        </th>
+        <th>
+            <button id="reset_btn">重置起点与终点</button>
+        </th>
+    </table>
+    <div id="container"></div>
+    <!-- <canvas id="canvas"></canvas> -->
+</body>
+<script src="/dist/app.js"></script>
+
+</html>

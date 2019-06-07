@@ -1,0 +1,37 @@
+html {
+    height: 100%
+}
+
+body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px
+}
+
+#container {
+    height: 100%
+}
+
+/* #empty {
+    height: 20%
+} */
+
+table {
+    text-align: right;
+    font-weight: normal;
+    font-family: 'Times New Roman', Times, serif
+}
+
+input {
+    text-align: right;
+    font-weight: bold;
+}
+
+#car_info {
+    font-size: 12px;
+    text-align: center
+}
+
+#car_info th {
+    width: 6em
+}
